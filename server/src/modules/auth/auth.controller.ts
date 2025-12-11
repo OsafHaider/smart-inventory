@@ -27,8 +27,7 @@ export const handleRegister = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { name, email, password, avatar } = req.body;
-
+    const { name, email, password, avatar, role } = req.body;
     const isEmailExists = await User.findOne({ email });
     if (isEmailExists) {
       throw new CustomError(409, "Email already in use");
@@ -43,6 +42,7 @@ export const handleRegister = async (
       password: hashedPassword,
       email,
       avatar: avatar || "",
+      role: role || "user",
     });
 
     res.status(201).json({
@@ -53,6 +53,7 @@ export const handleRegister = async (
         name: newUser.name,
         email: newUser.email,
         avatar: newUser.avatar,
+        role: newUser.role,
       },
     });
   } catch (error) {
