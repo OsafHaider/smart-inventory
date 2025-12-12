@@ -4,6 +4,7 @@ import { AuthRouter } from "./modules/auth/auth.routes";
 import { rateLimiter } from "./utils/rate-limiter";
 import { RateLimiterOptions } from "./utils/types/rate-limiter.types";
 import { errorHandler } from "./middlewares/error";
+import { ProductRouter } from "./modules/product/product.routes";
 
 export const app: Application = express();
 
@@ -19,7 +20,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/v1/auth", AuthRouter);
-
+app.use("/api/v1/product",ProductRouter)
 // Server Health Check
 app.get("/api/health", (req: Request, res: Response) => {
   res.status(200).json({

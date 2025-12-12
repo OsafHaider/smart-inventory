@@ -12,6 +12,7 @@ export const userRegisterSchema = z.object({
     .toLowerCase(),
   password: z.string().min(6, "Password must be at least 6 characters"),
   avatar: z.string().optional().default(""),
+  role: z.enum(["admin", "user"]).optional().default("user"),
 });
 
 export const userLoginSchema = z.object({
